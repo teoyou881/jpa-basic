@@ -12,31 +12,30 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class OrderItem {
+public class CategoryItem {
 
   @Id
   @GeneratedValue
-  @Column(name = "ORDER_ITEM_ID")
+  @Column(name = "CATEGORY_ITEM_ID")
   private Long id;
-
-
-  // @Column(name = "ORDER_ID")
-  // private Long orderId;
-  @ManyToOne
-  @JoinColumn(name = "ORDER_ID")
-  private Order order;
 
   @ManyToOne
   @JoinColumn(name = "ITEM_ID")
   private Item item;
+  @ManyToOne
+  @JoinColumn(name = "CATEGORY_ID")
+  private Category category;
 
-  private int orderPrice;
-  private int count;
+  // convenient methods
+  public void updateItem(Item item) {
+    this.item = item;
+    item.getCategoryItemList()
+        .add(this);
+  }
 
-
-  public void updateOrder(Order order) {
-    this.order = order;
-    order.getOrderItem()
-         .add(this);
+  public void updateCategory(Category category) {
+    this.category = category;
+    category.getItemCategoryList()
+            .add(this);
   }
 }
