@@ -3,6 +3,7 @@ package jpabook.shop;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
+import jpabook.shop.domain.Book;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,6 +20,13 @@ public class ShopApplication {
     tx.begin();
 
     try {
+
+      Book book = new Book();
+      book.setName("Spring in Action");
+      book.setAuthor("<NAME>");
+      book.setIsbn("978-1617291535");
+      em.persist(book);
+
       tx.commit();
     } catch (Exception e) {
       e.printStackTrace();

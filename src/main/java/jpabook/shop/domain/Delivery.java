@@ -1,5 +1,7 @@
 package jpabook.shop.domain;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Delivery {
+public class Delivery extends BaseEntity {
 
   @Id
   @GeneratedValue
@@ -23,6 +25,6 @@ public class Delivery {
   private String zipcode;
   private DeliveryStatus status;
 
-  @OneToOne(mappedBy = "delivery")
+  @OneToOne(mappedBy = "delivery", fetch = LAZY)
   private Order order;
 }

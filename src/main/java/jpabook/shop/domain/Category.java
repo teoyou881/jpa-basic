@@ -1,5 +1,7 @@
 package jpabook.shop.domain;
 
+import static jakarta.persistence.FetchType.LAZY;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class Category {
+public class Category extends BaseEntity {
 
   @Id
   @GeneratedValue
@@ -24,7 +26,7 @@ public class Category {
   private String name;
 
   // 다대일: 여러 자식 카테고리가 하나의 부모를 가질 수 있음
-  @ManyToOne
+  @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "PARENT_ID")
   private Category parent;
 
